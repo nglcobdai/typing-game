@@ -130,3 +130,12 @@ import Avatar from "@/components/mypage/Avatar";
 ## Spacer の使用
 
 基本的に、要素間のスペースはどちらにも mergin 等を持たせずに、`components/common/Spacer.tsx` を使用する
+
+## Storybook の作成
+
+1コンポーネントに対して、最低1つ Storybook ファイルを作成する
+```
+{Component}
+├ index.tsx
+└ index.stories.tsx
+```
