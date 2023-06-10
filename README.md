@@ -1,2 +1,1 @@
 # typing-game
-A
