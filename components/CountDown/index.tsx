@@ -13,6 +13,7 @@ export const CountDown = ({ setIsCountDownFinish, interval }: Props) => {
   useEffect(() => {
     if (count <= 0) {
       setIsCountDownFinish(true);
+      return;
     }
 
     setTimeout(() => setCount(count - 1), 1000);
