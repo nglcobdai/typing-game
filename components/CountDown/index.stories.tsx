@@ -12,20 +12,20 @@ const meta: Meta<typeof CountDown> = {
 
 export default meta;
 
-type CountDownStory = typeof CountDown & { numCount: number };
+type CountDownStory = typeof CountDown & { interval: number };
 
 type Story = StoryObj<CountDownStory>;
 
 export const Default: Story = (args: CountDownStory) => {
-  const [isStart, setIsStart] = useState(false);
+  const [isCountDownFinish, setIsCountDownFinish] = useState(false);
 
   return (
     <>
       <Center>
-        {isStart ? (
+        {isCountDownFinish ? (
           <p>true</p>
         ) : (
-          <CountDown {...args} setIsStart={setIsStart} />
+          <CountDown {...args} setIsCountDownFinish={setIsCountDownFinish} />
         )}
       </Center>
     </>
@@ -33,5 +33,5 @@ export const Default: Story = (args: CountDownStory) => {
 };
 
 Default.args = {
-  numCount: 3,
+  interval: 3,
 };

@@ -3,16 +3,16 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Text } from "@chakra-ui/react";
 
 type Props = {
-  setIsStart: Dispatch<SetStateAction<boolean>>;
-  numCount: number;
+  setIsCountDownFinish: Dispatch<SetStateAction<boolean>>;
+  interval: number;
 };
 
-export const CountDown = ({ setIsStart, numCount }: Props) => {
-  const [count, setCount] = useState(numCount);
+export const CountDown = ({ setIsCountDownFinish, interval }: Props) => {
+  const [count, setCount] = useState(interval);
 
   useEffect(() => {
     if (count <= 0) {
-      setIsStart(true);
+      setIsCountDownFinish(true);
     }
 
     setTimeout(() => setCount(count - 1), 1000);
