@@ -11,11 +11,11 @@ export const CountDown = ({ setIsStart, numCount }: Props) => {
   const [count, setCount] = useState(numCount);
 
   useEffect(() => {
-    if (count > 0) {
-      setTimeout(() => setCount(count - 1), 1000);
-    } else {
+    if (count <= 0) {
       setIsStart(true);
     }
+
+    setTimeout(() => setCount(count - 1), 1000);
   }, [count]);
 
   return (
