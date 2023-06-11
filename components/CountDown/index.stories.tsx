@@ -12,7 +12,7 @@ const meta: Meta<typeof CountDown> = {
 
 export default meta;
 
-type CountDownStory = typeof CountDown & { isStart: boolean; numCount: number };
+type CountDownStory = typeof CountDown & { numCount: number };
 
 type Story = StoryObj<CountDownStory>;
 
