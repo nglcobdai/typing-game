@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
-import { CodeBlock, Props } from "./index";
+import { CodeBlock } from "./index";
 
 const meta: Meta<typeof CodeBlock> = {
   title: "CodeBlock",
@@ -10,8 +10,7 @@ const meta: Meta<typeof CodeBlock> = {
 
 export default meta;
 
-// TODO: exportをやめる
-type CodeBlockStory = typeof CodeBlock & Props;
+type CodeBlockStory = typeof CodeBlock & { data: string };
 
 type Story = StoryObj<CodeBlockStory>;
 

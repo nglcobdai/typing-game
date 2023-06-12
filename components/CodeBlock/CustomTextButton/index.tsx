@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Center, Text } from "@chakra-ui/react";
 
-export type Props = {
+type Props = {
   setIsNext: React.Dispatch<React.SetStateAction<boolean>>;
   data: string;
 };
