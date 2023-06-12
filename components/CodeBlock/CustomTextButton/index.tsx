@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { Center, Text, VStack } from "@chakra-ui/react";
 
@@ -12,6 +12,14 @@ export type Props = {
 export const CodeBlock = ({ data, setIsNext }: Props) => {
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [inputText, setInputText] = useState<string>("");
+  const inputRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // ページがリロードされたときに<div>要素にフォーカスを指定
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   console.log(data.length);
 
@@ -32,7 +40,7 @@ export const CodeBlock = ({ data, setIsNext }: Props) => {
 
   return (
     <React.Fragment>
-      <div onKeyDown={(e) => handleKeyDown(e)} tabIndex={0}>
+      <div onKeyDown={(e) => handleKeyDown(e)} ref={inputRef} tabIndex={0}>
         <Center>
           <Text fontSize="3xl" color="tomato">
             {inputText}
