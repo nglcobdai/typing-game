@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, KeyboardEvent } from "react";
 
 import { Center, Text } from "@chakra-ui/react";
 
@@ -23,7 +23,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
     }
   }, []);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const keyPressed = event.key;
     if (keyPressed !== query[correctCount]) {
       return;
