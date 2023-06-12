@@ -7,14 +7,14 @@ export type Props = {
   data: string;
 };
 
-const replaceText = (text: string) => {
-  return text.replace(/ /g, "\u00A0");
-};
-
 export const CodeBlock = ({ data, setIsNext }: Props) => {
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [inputText, setInputText] = useState<string>("");
   const inputRef = useRef<HTMLDivElement>(null);
+
+  const replaceText = (text: string) => {
+    return text.replace(/ /g, "\u00A0");
+  };
 
   useEffect(() => {
     // ページがリロードされたときに<div>要素にフォーカスを指定
