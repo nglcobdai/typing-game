@@ -1,6 +1,7 @@
 import React, {
   Dispatch,
   KeyboardEvent,
+  SetStateAction,
   useEffect,
   useRef,
   useState,
@@ -9,7 +10,7 @@ import React, {
 import { Center, Text } from "@chakra-ui/react";
 
 type Props = {
-  setIsFinish: Dispatch<React.SetStateAction<boolean>>;
+  setIsFinish: Dispatch<SetStateAction<boolean>>;
   query: string;
 };
 
