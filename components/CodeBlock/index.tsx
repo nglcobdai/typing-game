@@ -48,7 +48,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div onKeyDown={(e) => handleKeyDown(e)} ref={inputRef} tabIndex={0}>
         <Center>
           <Text fontSize="3xl" color="tomato">
@@ -59,6 +59,6 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
           </Text>
         </Center>
       </div>
-    </React.Fragment>
+    </>
   );
 };
