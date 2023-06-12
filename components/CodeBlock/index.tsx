@@ -37,7 +37,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
     if (keyPressed !== query[input[0].index]) {
       return;
     }
-    const newIndex = input[0].index + 1; // setCorrectCountが非同期で更新されるので、ここで更新しておく
+    const newIndex = input[0].index + 1; // indexが非同期で更新されるので、新しい値をセットする
     setInput([
       { ...input, index: newIndex, inputText: input[0].inputText + keyPressed },
     ]);
