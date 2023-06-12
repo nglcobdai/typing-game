@@ -7,9 +7,18 @@ type Props = {
   query: string;
 };
 
+type Input = {
+  index: number;
+  inputText: string;
+};
+
 export const CodeBlock = ({ query, setIsFinish }: Props) => {
-  const [correctCount, setCorrectCount] = useState<number>(0);
-  const [inputText, setInputText] = useState<string>("");
+  const [input, setInput] = useState<Input[]>([
+    {
+      index: 0,
+      inputText: "",
+    },
+  ]);
   const inputRef = useRef<HTMLDivElement>(null);
 
   const replaceText = (text: string) => {
@@ -25,13 +34,14 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     const keyPressed = event.key;
-    if (keyPressed !== query[correctCount]) {
+    if (keyPressed !== query[input[0].index]) {
       return;
     }
-    const newCorrectCount = correctCount + 1; // setCorrectCountが非同期で更新されるので、ここで更新しておく
-    setInputText((inputText) => inputText + keyPressed);
-    setCorrectCount(newCorrectCount);
-    if (newCorrectCount === query.length) {
+    const newIndex = input[0].index + 1; // setCorrectCountが非同期で更新されるので、ここで更新しておく
+    setInput([
+      { ...input, index: newIndex, inputText: input[0].inputText + keyPressed },
+    ]);
+    if (newIndex === query.length) {
       setIsFinish(true);
       return;
     }
@@ -42,10 +52,10 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
       <div onKeyDown={(e) => handleKeyDown(e)} ref={inputRef} tabIndex={0}>
         <Center>
           <Text fontSize="3xl" color="tomato">
-            {replaceText(inputText)}
+            {replaceText(input[0].inputText)}
           </Text>
           <Text fontSize="3xl" color="#707070">
-            {replaceText(query.slice(correctCount))}
+            {replaceText(query.slice(input[0].index))}
           </Text>
         </Center>
       </div>
