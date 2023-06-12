@@ -9,6 +9,10 @@ export type Props = {
   data: string;
 };
 
+const replaceText = (text: string) => {
+  return text.replace(/ /g, "\u00A0");
+};
+
 export const CodeBlock = ({ data, setIsNext }: Props) => {
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [inputText, setInputText] = useState<string>("");
@@ -43,10 +47,10 @@ export const CodeBlock = ({ data, setIsNext }: Props) => {
       <div onKeyDown={(e) => handleKeyDown(e)} ref={inputRef} tabIndex={0}>
         <Center>
           <Text fontSize="3xl" color="tomato">
-            {inputText}
+            {replaceText(inputText)}
           </Text>
           <Text fontSize="3xl" color="#707070">
-            {data.slice(correctCount)}
+            {replaceText(data.slice(correctCount))}
           </Text>
         </Center>
       </div>
