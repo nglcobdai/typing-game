@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { Center, Text, VStack } from "@chakra-ui/react";
-
-import { VSpacer } from "@/components/common/Spacer";
+import { Center, Text } from "@chakra-ui/react";
 
 export type Props = {
   setIsNext: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,11 +23,8 @@ export const CodeBlock = ({ data, setIsNext }: Props) => {
     }
   }, []);
 
-  console.log(data.length);
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const keyPressed = event.key;
-    console.log("入力文字" + event.key + " 正解文字" + data[correctCount]);
     if (keyPressed !== data[correctCount]) {
       return;
     }

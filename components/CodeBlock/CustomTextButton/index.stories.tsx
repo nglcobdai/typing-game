@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 
 import { CodeBlock, Props } from "./index";
-import { useState } from "react";
 
 const meta: Meta<typeof CodeBlock> = {
   title: "CodeBlock",
