@@ -10,19 +10,19 @@ const meta: Meta<typeof CodeBlock> = {
 
 export default meta;
 
-type CodeBlockStory = typeof CodeBlock & { data: string };
+type CodeBlockStory = typeof CodeBlock & { query: string };
 
 type Story = StoryObj<CodeBlockStory>;
 
 export const Default: Story = (args: CodeBlockStory) => {
-  const [isNext, setIsNext] = useState(false);
+  const [isFinish, setIsFinish] = useState(false);
   return (
     <>
-      {isNext ? <p>finish</p> : <CodeBlock {...args} setIsNext={setIsNext} />}
+      {isFinish ? <p>finish</p> : <CodeBlock {...args} setIsFinish={setIsFinish} />}
     </>
   );
 };
 
 Default.args = {
-  data: "!cp []c",
+  query: "!cp []c",
 };

@@ -3,11 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Center, Text } from "@chakra-ui/react";
 
 type Props = {
-  setIsNext: React.Dispatch<React.SetStateAction<boolean>>;
-  data: string;
+  setIsFinish: React.Dispatch<React.SetStateAction<boolean>>;
+  query: string;
 };
 
-export const CodeBlock = ({ data, setIsNext }: Props) => {
+export const CodeBlock = ({ query, setIsFinish }: Props) => {
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [inputText, setInputText] = useState<string>("");
   const inputRef = useRef<HTMLDivElement>(null);
@@ -25,14 +25,14 @@ export const CodeBlock = ({ data, setIsNext }: Props) => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     const keyPressed = event.key;
-    if (keyPressed !== data[correctCount]) {
+    if (keyPressed !== query[correctCount]) {
       return;
     }
     const newCorrectCount = correctCount + 1; // setCorrectCountが非同期で更新されるので、ここで更新しておく
     setInputText((inputText) => inputText + keyPressed);
     setCorrectCount(newCorrectCount);
-    if (newCorrectCount === data.length) {
-      setIsNext(true);
+    if (newCorrectCount === query.length) {
+      setIsFinish(true);
       return;
     }
   };
@@ -45,7 +45,7 @@ export const CodeBlock = ({ data, setIsNext }: Props) => {
             {replaceText(inputText)}
           </Text>
           <Text fontSize="3xl" color="#707070">
-            {replaceText(data.slice(correctCount))}
+            {replaceText(query.slice(correctCount))}
           </Text>
         </Center>
       </div>
