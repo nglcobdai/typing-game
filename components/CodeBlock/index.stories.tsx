@@ -24,5 +24,5 @@ export const Default: Story = (args: CodeBlockStory) => {
 };
 
 Default.args = {
-  query: "!cp []c",
+  query: "!cp []c\n\t!cp []c",
 };

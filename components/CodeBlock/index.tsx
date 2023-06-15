@@ -7,29 +7,61 @@ import React, {
   useState,
 } from "react";
 
-import { Center, Text } from "@chakra-ui/react";
+import { Center, HStack, Text, VStack } from "@chakra-ui/react";
 
 type Props = {
   setIsFinish: Dispatch<SetStateAction<boolean>>;
   query: string;
 };
 
-type Input = {
-  index: number;
-  inputText: string;
+type InputIndex = {
+  total: number;
+  row: number;
+  column: number;
 };
 
 export const CodeBlock = ({ query, setIsFinish }: Props) => {
-  const [input, setInput] = useState<Input[]>([
-    {
-      index: 0,
-      inputText: "",
-    },
-  ]);
+  const [index, setIndex] = useState<InputIndex>({
+    total: 0,
+    row: 0,
+    column: 0,
+  });
   const inputRef = useRef<HTMLDivElement>(null);
+  const queryList = query.split("\n");
 
-  const replaceText = (text: string) => {
-    return text.replace(/ /g, "\u00A0");
+  const replaceWhitespaceTab = (text: string) => {
+    return text.replace(/ /g, "\u00A0").replace(/\t/g, "\u00A0\u00A0");
+  };
+
+  const splitText = (i: number, text: string) => {
+    let splitedText = {
+      inputedText: "",
+      nonInputedtext: text,
+    };
+    if (i < index.row) {
+      splitedText.inputedText = text;
+      splitedText.nonInputedtext = "";
+    } else if (i > index.row) {
+      splitedText.nonInputedtext = text;
+    } else {
+      splitedText.inputedText = text.slice(0, index.column);
+      splitedText.nonInputedtext = text.slice(index.column);
+    }
+    return splitedText;
+  };
+
+  const replaceText = (i: number, text: string) => {
+    const splitedText = splitText(i, text);
+    return (
+      <HStack spacing="0px">
+        <Text fontSize="3xl" color="tomato">
+          {replaceWhitespaceTab(splitedText.inputedText)}
+        </Text>
+        <Text fontSize="3xl" color="#707070">
+          {replaceWhitespaceTab(splitedText.nonInputedtext)}
+        </Text>
+      </HStack>
+    );
   };
 
   useEffect(() => {
@@ -40,30 +72,40 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
   }, []);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    const keyPressed = event.key;
-    if (keyPressed !== query[input[0].index]) {
-      return;
+    let keyPressed = event.key;
+
+    switch (query[index.total]) {
+      case "\n":
+        if (keyPressed !== "Enter") return;
+        break;
+      case "\t":
+        break;
+      default:
+        if (keyPressed !== query[index.total]) return;
+        break;
     }
-    const newIndex = input[0].index + 1; // indexが非同期で更新されるので、新しい値をセットする
-    setInput([
-      { ...input, index: newIndex, inputText: input[0].inputText + keyPressed },
-    ]);
-    if (newIndex === query.length) {
+
+    const newColumn = index.column + 1; // indexが非同期で更新されるので、新しい値をセットする
+    const newTotal = index.total + 1;
+
+    if (newTotal === query.length) {
       setIsFinish(true);
       return;
     }
+    if (newColumn === queryList[index.row].length + 1) {
+      setIndex({ total: newTotal, row: index.row + 1, column: 0 });
+    } else setIndex({ total: newTotal, row: index.row, column: newColumn });
   };
 
   return (
     <>
       <div onKeyDown={(e) => handleKeyDown(e)} ref={inputRef} tabIndex={0}>
         <Center>
-          <Text fontSize="3xl" color="tomato">
-            {replaceText(input[0].inputText)}
-          </Text>
-          <Text fontSize="3xl" color="#707070">
-            {replaceText(query.slice(input[0].index))}
-          </Text>
+          <VStack>
+            {queryList.map((item, i) => {
+              return <>{replaceText(i, item)}</>;
+            })}
+          </VStack>
         </Center>
       </div>
     </>
