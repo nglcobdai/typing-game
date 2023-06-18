@@ -18,11 +18,15 @@ export const Default: Story = (args: CodeBlockStory) => {
   const [isFinish, setIsFinish] = useState(false);
   return (
     <>
-      {isFinish ? <p>finish</p> : <CodeBlock {...args} setIsFinish={setIsFinish} />}
+      {isFinish ? (
+        <p>finish</p>
+      ) : (
+        <CodeBlock {...args} setIsFinish={setIsFinish} />
+      )}
     </>
   );
 };
 
 Default.args = {
-  query: "!cp []c",
+  query: "!cp []c\n\t!cp []c",
 };
