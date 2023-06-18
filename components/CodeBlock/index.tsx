@@ -36,11 +36,10 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
   const splitText = (i: number, text: string) => {
     let splitedText = {
       inputedText: "",
-      nonInputedtext: text,
+      nonInputedtext: "",
     };
     if (i < index.row) {
       splitedText.inputedText = text;
-      splitedText.nonInputedtext = "";
     } else if (i > index.row) {
       splitedText.nonInputedtext = text;
     } else {
