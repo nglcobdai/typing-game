@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CodeBlock } from "./index";
 
@@ -16,12 +16,22 @@ type Story = StoryObj<CodeBlockStory>;
 
 export const Default: Story = (args: CodeBlockStory) => {
   const [isFinish, setIsFinish] = useState(false);
+  const queryList = ["!cp []c", "!cp []c\n\t!cp []c"];
+  const [clearCounter, setClearCounter] = useState<number>(0);
+
+  useEffect(() => {
+    if (isFinish) {
+      setIsFinish(false);
+      setClearCounter(clearCounter + 1);
+    }
+  }, [isFinish]);
+
   return (
     <>
-      {isFinish ? (
+      {clearCounter === queryList.length ? (
         <p>finish</p>
       ) : (
-        <CodeBlock {...args} setIsFinish={setIsFinish} />
+        <CodeBlock query={queryList[clearCounter]} setIsFinish={setIsFinish} />
       )}
     </>
   );

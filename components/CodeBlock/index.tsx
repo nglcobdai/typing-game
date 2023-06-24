@@ -88,6 +88,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
     const newTotal = index.total + 1;
 
     if (newTotal === query.length) {
+      setIndex({ total: 0, row: 0, column: 0 });
       setIsFinish(true);
       return;
     }
