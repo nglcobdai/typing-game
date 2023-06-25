@@ -30,7 +30,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
   const queryList = query.split("\n");
 
   const replaceWhitespaceTab = (text: string) => {
-    return text.replace(/ /g, "\u00A0").replace(/\t/g, "\u00A0\u00A0");
+    return text.replace(/ /g, "\u00A0").replace(/\t/g, "\u23B5\u23B5");
   };
 
   const splitText = (i: number, text: string) => {
@@ -71,7 +71,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
   }, []);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    let keyPressed = event.key;
+    const keyPressed = event.key;
 
     switch (query[index.total]) {
       case "\n":
@@ -92,7 +92,13 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
       return;
     }
     if (newColumn === queryList[index.row].length + 1) {
-      setIndex({ total: newTotal, row: index.row + 1, column: 0 });
+      const newRow = index.row + 1;
+      if (query[newTotal] === "\t") {
+        // 改行後にタブがある場合、タブの分だけインデックスを進める
+        setIndex({ total: newTotal + 1, row: newRow, column: 1 });
+      } else {
+        setIndex({ total: newTotal, row: newRow, column: 0 });
+      }
     } else setIndex({ total: newTotal, row: index.row, column: newColumn });
   };
 
