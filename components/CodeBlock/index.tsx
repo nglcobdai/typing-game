@@ -30,7 +30,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
   const queryList = query.split("\n");
 
   const replaceWhitespaceTab = (text: string) => {
-    return text.replace(/ /g, "\u00A0").replace(/\t/g, "\u00A0\u00A0");
+    return text.replace(/ /g, "\u00A0").replace(/\t/g, "\u23B5\u23B5");
   };
 
   const splitText = (i: number, text: string) => {
