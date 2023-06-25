@@ -71,7 +71,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
   }, []);
 
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    let keyPressed = event.key;
+    const keyPressed = event.key;
 
     switch (query[index.total]) {
       case "\n":
