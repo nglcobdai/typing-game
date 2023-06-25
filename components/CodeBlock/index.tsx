@@ -100,7 +100,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
     <>
       <div onKeyDown={(e) => handleKeyDown(e)} ref={inputRef} tabIndex={0}>
         <Center>
-          <VStack>
+          <VStack align="left">
             {queryList.map((item, i) => {
               return <>{replaceText(i, item)}</>;
             })}
