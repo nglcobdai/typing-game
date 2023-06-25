@@ -92,7 +92,13 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
       return;
     }
     if (newColumn === queryList[index.row].length + 1) {
-      setIndex({ total: newTotal, row: index.row + 1, column: 0 });
+      const newRow = index.row + 1;
+      if (query[newTotal] === "\t") {
+        // 改行後にタブがある場合、タブの分だけインデックスを進める
+        setIndex({ total: newTotal + 1, row: newRow, column: 1 });
+      } else {
+        setIndex({ total: newTotal, row: newRow, column: 0 });
+      }
     } else setIndex({ total: newTotal, row: index.row, column: newColumn });
   };
 
