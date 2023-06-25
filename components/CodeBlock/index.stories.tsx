@@ -31,7 +31,7 @@ export const Default: Story = (args: CodeBlockStory) => {
       {clearCounter === queryList.length ? (
         <p>finish</p>
       ) : (
-        <CodeBlock query={queryList[clearCounter]} setIsFinish={setIsFinish} />
+        <CodeBlock key={clearCounter} query={queryList[clearCounter]} setIsFinish={setIsFinish} />
       )}
     </>
   );
