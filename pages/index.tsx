@@ -19,7 +19,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setClearCounter(clearCounter + 1);
-    console.log("queryState: " + queryState);
   }, [queryState]);
 
   const switchPage = () => {
@@ -79,7 +78,6 @@ const Home: NextPage = () => {
       );
     }
   };
-  console.log("clearCounter: " + clearCounter);
 
   return <>{switchPage()}</>;
 };
