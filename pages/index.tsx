@@ -10,18 +10,17 @@ import { CustomTextButton } from "@/components/CustomTextButton";
 const Home: NextPage = () => {
   const [isStart, setIsStart] = useState<boolean>(false);
   const [isCountDownFinish, setIsCountDownFinish] = useState<boolean>(false);
-  const [isFinish, setIsFinish] = useState<boolean>(false);
-  const [clearCounter, setClearCounter] = useState<number>(0);
+  const [queryState, setQueryState] = useState<boolean>(false);
+  const [clearCounter, setClearCounter] = useState<number>(-1);
   const queryList = [
     "if __name__ == '__main__':\n\tprint('Hello, world!')",
     "name = input('Enter your name: ')\nprint('Hello, ' + name + '!')",
   ];
 
   useEffect(() => {
-    if (isFinish === false) return;
-    setIsFinish(false);
     setClearCounter(clearCounter + 1);
-  }, [isFinish === true]);
+    console.log("queryState: " + queryState);
+  }, [queryState]);
 
   const switchPage = () => {
     if (!isStart) {
@@ -56,7 +55,8 @@ const Home: NextPage = () => {
           <CodeBlock
             key={clearCounter}
             query={queryList[clearCounter]}
-            setIsFinish={setIsFinish}
+            queryState={queryState}
+            setQueryState={setQueryState}
           />
         </>
       );
@@ -71,7 +71,6 @@ const Home: NextPage = () => {
             buttonText={"Restart"}
             clickFunc={() => {
               setIsCountDownFinish(false);
-              setIsFinish(false);
               setClearCounter(0);
               return;
             }}
@@ -80,6 +79,7 @@ const Home: NextPage = () => {
       );
     }
   };
+  console.log("clearCounter: " + clearCounter);
 
   return <>{switchPage()}</>;
 };
