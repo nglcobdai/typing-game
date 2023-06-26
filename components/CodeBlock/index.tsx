@@ -29,7 +29,6 @@ export const CodeBlock = ({ query, queryState, setQueryState }: Props) => {
   });
   const inputRef = useRef<HTMLDivElement>(null);
   const queryList = query.split("\n");
-  const toggleQueryState = () => setQueryState(!queryState);
 
   const replaceWhitespaceTab = (text: string) => {
     return text.replace(/ /g, "\u00A0").replace(/\t/g, "\u00A0\u00A0");
@@ -90,7 +89,7 @@ export const CodeBlock = ({ query, queryState, setQueryState }: Props) => {
     const newTotal = index.total + 1;
 
     if (newTotal === query.length) {
-      toggleQueryState();
+      setQueryState(!queryState);
       return;
     }
     if (newColumn === queryList[index.row].length + 1) {
