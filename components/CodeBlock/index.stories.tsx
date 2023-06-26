@@ -15,13 +15,17 @@ type CodeBlockStory = typeof CodeBlock & { query: string };
 type Story = StoryObj<CodeBlockStory>;
 
 export const Default: Story = (args: CodeBlockStory) => {
-  const [isFinish, setIsFinish] = useState(false);
+  const [queryState, setQueryState] = useState(false);
   return (
     <>
-      {isFinish ? (
+      {queryState ? (
         <p>finish</p>
       ) : (
-        <CodeBlock {...args} setIsFinish={setIsFinish} />
+        <CodeBlock
+          {...args}
+          queryState={queryState}
+          setQueryState={setQueryState}
+        />
       )}
     </>
   );

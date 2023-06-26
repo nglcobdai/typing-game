@@ -10,7 +10,8 @@ import React, {
 import { HStack, Text, VStack } from "@chakra-ui/react";
 
 type Props = {
-  setIsFinish: Dispatch<SetStateAction<boolean>>;
+  queryState: boolean;
+  setQueryState: Dispatch<SetStateAction<boolean>>;
   query: string;
 };
 
@@ -20,7 +21,7 @@ type InputIndex = {
   column: number;
 };
 
-export const CodeBlock = ({ query, setIsFinish }: Props) => {
+export const CodeBlock = ({ query, queryState, setQueryState }: Props) => {
   const [index, setIndex] = useState<InputIndex>({
     total: 0,
     row: 0,
@@ -88,7 +89,7 @@ export const CodeBlock = ({ query, setIsFinish }: Props) => {
     const newTotal = index.total + 1;
 
     if (newTotal === query.length) {
-      setIsFinish(true);
+      setQueryState(!queryState);
       return;
     }
     if (newColumn === queryList[index.row].length + 1) {
