@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 
-import { HStack, Text, VStack } from "@chakra-ui/react";
+import { Box, HStack, Text, VStack } from "@chakra-ui/react";
 
 type Props = {
   queryState: boolean;
@@ -108,7 +108,7 @@ export const CodeBlock = ({ query, queryState, setQueryState }: Props) => {
       <div onKeyDown={(e) => handleKeyDown(e)} ref={inputRef} tabIndex={0}>
         <VStack align="left">
           {queryList.map((item, i) => {
-            return <>{replaceText(i, item)}</>;
+            return <Box key={i}>{replaceText(i, item)}</Box>;
           })}
         </VStack>
       </div>
